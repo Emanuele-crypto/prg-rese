@@ -1012,10 +1012,10 @@ $(document).ready(function() {
 
    // Rese per linea di trasformazione
    const yieldsPerLine = {
-       'GOE EST/400': 31.66,
-       'BOE/1100': 31.27,
-       'GOE EST/POLY': 30.58,
-       'GOE INT/POLY': 28.29,
+       'GOE EST/400': 31.60,
+       'BOE/1100': 31.30,
+       'GOE EST/POLY': 30.60,
+       'GOE INT/POLY': 28.30,
        'BIRILLATRICI': 26.60,
        'GOE EST/BIRILLATRICI': 25.60
    };
@@ -1175,16 +1175,12 @@ $(document).ready(function() {
                    <div class="form-input">
                        <select class="linea-trasformazione" onchange="updateBioStyles(${index}); updateYieldByLine(${index}); calculateSupplier(${index});">
                            <option value="">Seleziona linea</option>
-                           <option value="GOE EST./400">GOE EST./400</option>
-                           <option value="GOE ST./POLY">GOE ST./POLY</option>
                            <option value="GOE EST/400">GOE EST/400</option>
                            <option value="BOE/1100">BOE/1100</option>
-                           <option value="BOE /1100">BOE /1100</option>
                            <option value="GOE EST/POLY">GOE EST/POLY</option>
-                           <option value="GOE EST./POLY">GOE EST./POLY</option>
-                           <option value="GOE INT./POLY">GOE INT./POLY</option>
+                           <option value="GOE INT/POLY">GOE INT/POLY</option>
                            <option value="BIRILLATRICI">BIRILLATRICI</option>
-                           <option value="GOE EST./BIRILLATRICI">GOE EST./BIRILLATRICI</option>
+                           <option value="GOE EST/BIRILLATRICI">GOE EST/BIRILLATRICI</option>
                        </select>
                    </div>
                </div>
@@ -1310,6 +1306,7 @@ $(document).ready(function() {
                            <option value="32">32</option>
                            <option value="40">40</option>
                            <option value="45">45</option>
+                           <option value="48">48</option>                           
                            <option value="50">50</option>
                            <option value="55">55</option>
                            <option value="60">60</option>
@@ -1994,6 +1991,7 @@ $(document).ready(function() {
                                <option value="40">40</option>
                                <option value="45">45</option>
                                <option value="48">48</option>
+                               <option value="50">50</option>                               
                                <option value="55">55</option>
                                <option value="60">60</option>
                                <option value="65">65</option>
