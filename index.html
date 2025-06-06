@@ -1277,7 +1277,7 @@ $(document).ready(function() {
                <div class="form-row">
                    <span class="form-label">Linea:</span>
                    <div class="form-input">
-                       <select class="linea-trasformazione" onchange="updateBioStyles(${index}); updateYieldByLine(${index}); calculateSupplier(${index});">
+                       <select class="linea-trasformazione" onchange="updateBioStyles(${index}); updateYieldByLine(${index}); calculateSupplier(${index}); $(this).closest('.supplier-card').find('.orario-inizio').removeData('manually-changed');">
                            <option value="">Seleziona linea</option>
                            <option value="GOE EST/400">GOE EST/400</option>
                            <option value="BOE/1100">BOE/1100</option>
