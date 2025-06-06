@@ -195,7 +195,7 @@ body {
    border-radius: 5px;
    padding: 12px;
    page-break-inside: avoid;
-   min-height: 520px;
+   min-height: 540px;
 }
 
 /* COLORI COMBINAZIONI */
@@ -419,6 +419,17 @@ body {
    border: 1px solid #28a745;
 }
 
+.combination-details {
+   font-size: 10px;
+   color: #856404;
+   margin-top: 3px;
+   background-color: #fff3cd;
+   padding: 4px;
+   border-radius: 3px;
+   border: 1px solid #ffc107;
+   line-height: 1.2;
+}
+
 .hidden-field {
    display: none;
 }
@@ -556,32 +567,14 @@ body {
    margin-bottom: 15px;
 }
 
-/* Stili per dettagli combinazione */
-.combination-details {
-   font-size: 10px;
-   color: #856404;
-   background-color: rgba(255, 193, 7, 0.3);
-   padding: 5px;
-   border-radius: 3px;
-   margin-top: 3px;
-   border: 1px solid #ffc107;
-   line-height: 1.2;
-}
-
-.combination-details strong {
-   display: block;
-   margin-bottom: 2px;
-}
-
-/* MIGLIORATA: Stampa con caratteri enormi e colori mantenuti */
+/* STAMPA CON CARATTERI RADDOPPIATI E COLORI MANTENUTI */
 @media print {
    body { 
-       margin: 5mm;
-       background-color: #ffffff !important;
-       font-size: 34px !important;
-       line-height: 1.2 !important;
+       margin: 8mm;
+       background-color: #f5f5f5 !important;
+       font-size: 52px !important;
+       line-height: 1.3;
        color: #000000 !important;
-       font-weight: bold !important;
    }
    
    .controls-section {
@@ -599,30 +592,25 @@ body {
    .header {
        background: #1e3c72 !important;
        color: #ffffff !important;
-       border: 4px solid #000000 !important;
+       border: 3px solid #000000 !important;
        padding: 30px !important;
        margin-bottom: 25px !important;
    }
    
    .header h1 {
-       font-size: 52px !important;
+       font-size: 84px !important;
        color: #ffffff !important;
-       font-weight: 900 !important;
-       text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
+       font-weight: bold !important;
    }
    
    .header .subtitle {
-       font-size: 38px !important;
+       font-size: 64px !important;
        color: #ffffff !important;
-       font-weight: bold !important;
-       text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
    }
    
    .header-info {
-       font-size: 32px !important;
+       font-size: 56px !important;
        color: #ffffff !important;
-       font-weight: bold !important;
-       text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
    }
    
    .totals-section {
@@ -633,16 +621,13 @@ body {
    }
    
    .total-value {
-       font-size: 48px !important;
+       font-size: 72px !important;
        color: #000000 !important;
-       font-weight: 900 !important;
-       text-shadow: 1px 1px 2px rgba(255,255,255,0.8) !important;
    }
    
    .total-label {
-       font-size: 32px !important;
+       font-size: 52px !important;
        color: #000000 !important;
-       font-weight: bold !important;
    }
    
    .suppliers-container {
@@ -651,12 +636,12 @@ body {
    }
    
    .supplier-card {
-       font-size: 24px !important;
-       padding: 18px !important;
+       font-size: 40px !important;
+       padding: 20px !important;
        background-color: #e9ecef !important;
        border: 3px solid #000000 !important;
        page-break-inside: avoid;
-       font-weight: bold !important;
+       min-height: 600px !important;
    }
    
    .supplier-card.combination-verde {
@@ -677,12 +662,11 @@ body {
    .supplier-header {
        background: #6c757d !important;
        color: #ffffff !important;
-       font-size: 30px !important;
-       font-weight: 900 !important;
+       font-size: 52px !important;
+       font-weight: bold !important;
        padding: 15px !important;
        border-bottom: 3px solid #000000 !important;
        text-align: center !important;
-       text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
    }
    
    .supplier-header.combination-verde {
@@ -705,62 +689,55 @@ body {
    }
    
    .form-label {
-       font-size: 24px !important;
-       font-weight: 900 !important;
+       font-size: 40px !important;
+       font-weight: bold !important;
        color: #000000 !important;
-       text-shadow: 0.5px 0.5px 1px rgba(255,255,255,0.8) !important;
    }
    
    .form-input input,
    .form-input select,
    .form-input textarea {
-       font-size: 22px !important;
+       font-size: 36px !important;
        padding: 10px !important;
        border: 2px solid #000000 !important;
        background-color: #ffffff !important;
        color: #000000 !important;
-       font-weight: bold !important;
    }
    
    .calculated-field,
    .yield-result {
        background-color: #e7f3ff !important;
-       font-weight: 900 !important;
+       font-weight: bold !important;
        border: 3px solid #2a5298 !important;
-       color: #1e3c72 !important;
    }
    
    .bio-red-field {
        color: #dc3545 !important;
-       font-weight: 900 !important;
+       font-weight: bold !important;
        border: 3px solid #dc3545 !important;
-       background-color: #f8d7da !important;
    }
    
    .bio-black-field {
        color: #000000 !important;
-       font-weight: 900 !important;
+       font-weight: bold !important;
        border: 3px solid #000000 !important;
-       background-color: #f8f9fa !important;
    }
    
    .bio-red-text {
        color: #dc3545 !important;
-       font-weight: 900 !important;
-       text-shadow: 0.5px 0.5px 1px rgba(255,255,255,0.8) !important;
+       font-weight: bold !important;
    }
    
    .bio-black-text {
        color: #000000 !important;
-       font-weight: 900 !important;
-       text-shadow: 0.5px 0.5px 1px rgba(255,255,255,0.8) !important;
+       font-weight: bold !important;
    }
    
    .combination-result {
        background-color: #fff3cd !important;
        border: 4px solid #ffc107 !important;
        color: #856404 !important;
-       font-weight: 900 !important;
+       font-weight: bold !important;
    }
    
    .received-transfer {
@@ -777,57 +754,50 @@ body {
        background: #ffc107 !important;
        border: 3px solid #000000 !important;
        padding: 25px !important;
-       color: #000000 !important;
    }
    
    .summary-title {
-       font-size: 34px !important;
+       font-size: 56px !important;
        color: #000000 !important;
-       background-color: rgba(255, 255, 255, 0.8) !important;
+       background-color: rgba(255, 255, 255, 0.3) !important;
        padding: 12px !important;
-       font-weight: 900 !important;
-       border: 2px solid #000000 !important;
    }
    
    .summary-item {
-       font-size: 26px !important;
+       font-size: 44px !important;
        color: #000000 !important;
        margin-bottom: 12px !important;
-       font-weight: bold !important;
    }
    
    .summary-value {
-       font-size: 30px !important;
+       font-size: 52px !important;
        color: #000000 !important;
-       background-color: #ffffff !important;
+       background-color: rgba(255, 255, 255, 0.4) !important;
        border: 2px solid #000000 !important;
-       font-weight: 900 !important;
    }
    
    .summary-input,
    .summary-textarea {
-       font-size: 24px !important;
+       font-size: 40px !important;
        border: 2px solid #000000 !important;
-       background-color: #ffffff !important;
+       background-color: rgba(255, 255, 255, 0.8) !important;
        color: #000000 !important;
-       font-weight: bold !important;
    }
    
    .transfer-details,
    .distribution-details {
-       font-size: 20px !important;
-       color: #155724 !important;
+       font-size: 36px !important;
+       color: #000000 !important;
        background-color: #d4edda !important;
        border: 2px solid #28a745 !important;
-       font-weight: bold !important;
    }
    
    .combination-details {
-       font-size: 18px !important;
+       font-size: 32px !important;
        color: #856404 !important;
        background-color: #fff3cd !important;
        border: 2px solid #ffc107 !important;
-       font-weight: bold !important;
+       padding: 8px !important;
    }
    
    .section-divider {
@@ -837,13 +807,12 @@ body {
    
    .concentrato-field {
        background-color: #e7f3ff !important;
-       font-weight: 900 !important;
+       font-weight: bold !important;
        border: 3px solid #2a5298 !important;
-       color: #1e3c72 !important;
    }
    
    @page {
-       margin: 8mm;
+       margin: 10mm;
        size: A4 landscape;
    }
 }
@@ -1259,7 +1228,6 @@ $(document).ready(function() {
                    <div class="form-input">
                        <input type="number" class="quantita-prima yield-result" readonly onchange="updateSupplierConcentrato(${index})">
                        <div class="transfer-details hidden-field" style="font-size: 10px; margin-top: 2px;"></div>
-                       <!-- Dettagli combinazione -->
                        <div class="combination-details hidden-field"></div>
                    </div>
                </div>
@@ -2143,7 +2111,7 @@ $(document).ready(function() {
        return $(`.supplier-card[data-supplier-index="${maxIndex}"]`);
    }
 
-   // MODIFICATA: Funzione per applicare combinazione con dettagli individuali + somma
+   // MODIFICATA: Applica combinazione con nuovo sistema di visualizzazione
    function applyCombination(color) {
        const selectedCombo = $(`#combinazione-fornitori-${color}`).val();
        if (!selectedCombo) {
@@ -2152,11 +2120,10 @@ $(document).ready(function() {
        }
        
        const indexes = selectedCombo.split(',');
-       let totale = 0;
        let combinationDetails = [];
        let combinationSupplierIndexes = indexes.map(i => parseInt(i));
        
-       // Raccogli dati da tutti i fornitori della combinazione
+       // Raccogli dettagli di ogni fornitore nella combinazione
        indexes.forEach(index => {
            const card = $(`.supplier-card[data-supplier-index="${index}"]`);
            
@@ -2170,8 +2137,7 @@ $(document).ready(function() {
            const resaPrima = parseFloat(card.find('.resa-prima').val()) || 0;
            
            if (quantitaTrasformata > 0) {
-               const quantitaIndividuale = (quantitaTrasformata * resaPrima / 100);
-               totale += quantitaIndividuale;
+               const risultatoFornitore = (quantitaTrasformata * resaPrima / 100);
                
                combinationDetails.push({
                    nome: nomeFornitore,
@@ -2179,7 +2145,7 @@ $(document).ready(function() {
                    linea: linea,
                    quantita: quantitaTrasformata,
                    resa: resaPrima,
-                   risultato: quantitaIndividuale.toFixed(1),
+                   risultato: risultatoFornitore.toFixed(1),
                    supplierIndex: parseInt(index)
                });
            }
@@ -2187,32 +2153,37 @@ $(document).ready(function() {
        
        const lastSupplierInCombo = getLastSupplierInCombination(selectedCombo);
        if (lastSupplierInCombo.length > 0) {
+           const lastSupplierIndex = lastSupplierInCombo.data('supplier-index');
+           
+           // Trova la quantità del fornitore finale nella combinazione
+           const lastSupplierDetail = combinationDetails.find(d => d.supplierIndex === lastSupplierIndex);
+           const lastSupplierQty = lastSupplierDetail ? parseFloat(lastSupplierDetail.risultato) : 0;
+           
+           // Calcola il totale della combinazione
+           const totalCombination = combinationDetails.reduce((sum, detail) => 
+               sum + parseFloat(detail.risultato), 0);
+           
            const quantitaPrimaField = lastSupplierInCombo.find('.quantita-prima');
            
-           // Calcola il valore individuale dell'ultimo fornitore
-      const lastSupplierIndex = lastSupplierInCombo.data('supplier-index');
-           const lastSupplierData = combinationDetails.find(d => d.supplierIndex === lastSupplierIndex);
-           const individualQty = lastSupplierData ? lastSupplierData.risultato : '0';
-           
-           // Imposta il valore del singolo fornitore nel campo principale
-           quantitaPrimaField.val(individualQty);
+           // NUOVA LOGICA: Mostra solo la quantità del fornitore finale
+           quantitaPrimaField.val(lastSupplierQty.toFixed(1));
            quantitaPrimaField.addClass('combination-result');
            quantitaPrimaField.attr('data-combination-type', color);
            
-           // Crea dettagli combinazione da mostrare sotto il campo
-           const detailsContainer = lastSupplierInCombo.find('.combination-details');
-           detailsContainer.removeClass('hidden-field');
-           
-           // Genera il testo con tutti i dettagli della combinazione
-           const detailsText = combinationDetails.map(detail => 
-               `F${detail.supplierIndex} = ${detail.risultato} kg`
+           // Crea i dettagli della combinazione da mostrare sotto il campo
+           const combinationText = combinationDetails.map(detail => 
+               `F${detail.supplierIndex}= ${detail.risultato}kg`
            ).join(' + ');
+           const totalText = `Totale ${totalCombination.toFixed(1)}kg`;
            
-           detailsContainer.html(`
-               <strong>Combinazione ${color.toUpperCase()}:</strong><br>
-               ${detailsText}<br>
-               <strong>Totale = ${totale.toFixed(1)} kg</strong>
-           `);
+           // Mostra i dettagli sotto il campo succo 1ª
+           const combinationDetailsContainer = lastSupplierInCombo.find('.combination-details');
+           combinationDetailsContainer.removeClass('hidden-field');
+           combinationDetailsContainer.html(`<strong>
+           // Mostra i dettagli sotto il campo succo 1ª
+           const combinationDetailsContainer = lastSupplierInCombo.find('.combination-details');
+           combinationDetailsContainer.removeClass('hidden-field');
+           combinationDetailsContainer.html(`<strong>Combinazione ${color.charAt(0).toUpperCase() + color.slice(1)}:</strong><br/>${combinationText}<br/><strong>${totalText}</strong>`);
            
            // Applica colori a tutti i fornitori della combinazione
            indexes.forEach(index => {
@@ -2238,7 +2209,7 @@ $(document).ready(function() {
            updateSupplierConcentrato(lastSupplierInCombo.data('supplier-index'));
            
            const colorText = color.charAt(0).toUpperCase() + color.slice(1);
-           alert(`Combinazione ${colorText} applicata!\n\nDettaglio:\n${combinationDetails.map(d => `F${d.supplierIndex} - ${d.nome}: ${d.quantita}kg × ${d.resa}% = ${d.risultato}kg`).join('\n')}\n\nTotale combinazione: ${totale.toFixed(1)} kg\nQuantità F${lastSupplierIndex}: ${individualQty} kg`);
+           alert(`Combinazione ${colorText} applicata!\n\nDettaglio:\n${combinationDetails.map(d => `F${d.supplierIndex} - ${d.nome}: ${d.quantita}kg × ${d.resa}% = ${d.risultato}kg`).join('\n')}\n\nTotale combinazione: ${totalCombination.toFixed(1)} kg\nQuantità F${lastSupplierIndex}: ${lastSupplierQty.toFixed(1)} kg`);
        }
    }
 
@@ -2262,7 +2233,7 @@ $(document).ready(function() {
                    quantitaPrimaField.removeClass('combination-result');
                    quantitaPrimaField.removeAttr('data-combination-type');
                    
-                   // Nascondi dettagli combinazione
+                   // Nascondi e reset dettagli combinazione
                    card.find('.combination-details').addClass('hidden-field').html('');
                    
                    // Ricalcola valore normale
@@ -2378,7 +2349,7 @@ $(document).ready(function() {
                hasCombination: $(this).find('.quantita-prima').hasClass('combination-result'),
                combinationType: $(this).find('.quantita-prima').attr('data-combination-type') || '',
                combinationColor: combinationColor,
-               combinationDetails: $(this).find('.combination-details').html(),
+               combinationDetails: $(this).find('.combination-details').html() || '',
                hasReceivedTransfers: $(this).find('.quantita-prima').hasClass('received-transfer'),
                receivedTransfers: receivedTransfers,
                distributionData: distributionData,
@@ -2790,7 +2761,7 @@ $(document).ready(function() {
    initCurrentDate();
    updateSuppliersCount();
 
-   console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Versione con combinazioni dettagliate, caratteri enormi per stampa e colori dashboard mantenuti');
+   console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Versione con dettagli combinazione migliorati, caratteri stampa raddoppiati e colori dashboard mantenuti');
 });
 </script>
 </body>
