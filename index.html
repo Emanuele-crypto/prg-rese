@@ -1129,7 +1129,7 @@ $(document).ready(function() {
        if (!quantita || !brix || brix === 'NAT') return 0;
        const brixValue = parseFloat(brix);
        if (isNaN(brixValue) || brixValue === 0) return 0;
-       return (quantita * 0.95 * 7.5 / brixValue).toFixed(1);
+       return (quantita * 0.90 * 7.5 / brixValue).toFixed(1);
    }
 
    // Inizializzazione data corrente e ultima revisione
@@ -1575,47 +1575,41 @@ $(document).ready(function() {
    };
 
    // Gestione colori bio con nuovi colori combinazioni
-   window.updateBioStyles = function(index) {
-       const card = $(`.supplier-card[data-supplier-index="${index}"]`);
-       const certificazione = card.find('.certificazione-prodotto').val();
-       const bioStatus = card.find('.bio-prima').val();
+window.updateBioStyles = function(index) {
+   const card = $(`.supplier-card[data-supplier-index="${index}"]`);
+   const certificazione = card.find('.certificazione-prodotto').val();
+   const bioStatus = card.find('.bio-prima').val();
+   
+   const certificazioneField = card.find('.certificazione-prodotto');
+   const varietaField = card.find('.varieta-prodotto');
+   const lineaField = card.find('.linea-trasformazione');
+   const bioField = card.find('.bio-prima');
+   const destinazionePrimaLabel = card.find('.dest-label');
+   
+   // Reset tutti gli stili
+   certificazioneField.removeClass('bio-red-field bio-black-field');
+   varietaField.removeClass('bio-red-field bio-black-field');
+   lineaField.removeClass('bio-red-field bio-black-field');
+   bioField.removeClass('bio-red-field bio-black-field');
+   destinazionePrimaLabel.removeClass('bio-red-text bio-black-text');
+   
+   const isBioSpecific = ['BIO EU', 'BIO DEM', 'BIO NTD', 'BIO DEM/NTD'].includes(certificazione);
+   
+   if (isBioSpecific) {
+       // Certificazione, varietà e linea rimangono sempre rossi se BIO
+       certificazioneField.addClass('bio-red-field');
+       varietaField.addClass('bio-red-field');
+       lineaField.addClass('bio-red-field');
        
-       const certificazioneField = card.find('.certificazione-prodotto');
-       const varietaField = card.find('.varieta-prodotto');
-       const lineaField = card.find('.linea-trasformazione');
-       const bioField = card.find('.bio-prima');
-       const destinazionePrimaLabel = card.find('.dest-label');
-       
-       // Reset tutti gli stili
-       certificazioneField.removeClass('bio-red-field bio-black-field');
-       varietaField.removeClass('bio-red-field bio-black-field');
-       lineaField.removeClass('bio-red-field bio-black-field');
-       bioField.removeClass('bio-red-field bio-black-field');
-       destinazionePrimaLabel.removeClass('bio-red-text bio-black-text');
-       
-       const isBioSpecific = ['BIO EU', 'BIO DEM', 'BIO NTD', 'BIO DEM/NTD'].includes(certificazione);
-       
-       if (isBioSpecific) {
-           if (bioStatus === 'SI') {
-               certificazioneField.addClass('bio-red-field');
-               varietaField.addClass('bio-red-field');
-               lineaField.addClass('bio-red-field');
-               bioField.addClass('bio-red-field');
-               destinazionePrimaLabel.addClass('bio-red-text');
-           } else if (bioStatus === 'DECLASSATO') {
-               certificazioneField.addClass('bio-red-field');
-               varietaField.addClass('bio-red-field');
-               lineaField.addClass('bio-red-field');
-               bioField.addClass('bio-black-field');
-               destinazionePrimaLabel.addClass('bio-black-text');
-           } else if (bioStatus === 'NO') {
-               certificazioneField.addClass('bio-black-field');
-               varietaField.addClass('bio-black-field');
-               lineaField.addClass('bio-black-field');
-               bioField.addClass('bio-black-field');
-               destinazionePrimaLabel.addClass('bio-black-text');
-           }
+       // Destinazione segue il bio status
+       if (bioStatus === 'SI') {
+           bioField.addClass('bio-red-field');
+           destinazionePrimaLabel.addClass('bio-red-text');
+       } else if (bioStatus === 'DECLASSATO' || bioStatus === 'NO') {
+           bioField.addClass('bio-black-field');
+           destinazionePrimaLabel.addClass('bio-black-text');
        }
+   }
        
        // Gestisci campo altro certificazione
        const altroField = card.find('.altra-certificazione');
