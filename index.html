@@ -1301,7 +1301,7 @@ $(document).ready(function() {
                <div class="form-row">
                    <span class="form-label">Inizio:</span>
                    <div class="form-input">
-                       <input type="time" class="orario-inizio" onchange="calculateEndTime(${index})">
+                       <input type="time" class="orario-inizio" onchange="calculateEndTime(${index}); $(this).data('manually-changed', true);">
                    </div>
                </div>
 
