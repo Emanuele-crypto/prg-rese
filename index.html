@@ -1536,45 +1536,86 @@ $(document).ready(function() {
        updateSupplierConcentrato(index);
    };
 
-   window.calculateEndTime = function(index) {
-       const card = $(`.supplier-card[data-supplier-index="${index}"]`);
-       const quantitaTrasformata = parseFloat(card.find('.quantita-trasformata').val()) || 0;
-       const portata = parseFloat(card.find('.portata-impianto').val()) || 0;
-       const orarioInizio = card.find('.orario-inizio').val();
+  window.calculateEndTime = function(index) {
+   const card = $(`.supplier-card[data-supplier-index="${index}"]`);
+   const quantitaTrasformata = parseFloat(card.find('.quantita-trasformata').val()) || 0;
+   const portata = parseFloat(card.find('.portata-impianto').val()) || 0;
+   const orarioInizio = card.find('.orario-inizio').val();
+   
+   if (quantitaTrasformata > 0 && portata > 0 && orarioInizio) {
+       const durataTotaleMinuti = Math.round((quantitaTrasformata / portata) * 60);
        
-       if (quantitaTrasformata > 0 && portata > 0 && orarioInizio) {
-           const durataTotaleMinuti = Math.round((quantitaTrasformata / portata) * 60);
-           const ore = Math.floor(durataTotaleMinuti / 60);
-           const minuti = durataTotaleMinuti % 60;
-           
-           const dataLavorazione = $('#data-lavorazione').val();
-           if (!dataLavorazione) {
-               card.find('.orario-fine-display').html('');
-               return;
-           }
-           
-           const [oraInizio, minutiInizio] = orarioInizio.split(':').map(n => parseInt(n));
-           const dataInizio = new Date(dataLavorazione);
-           dataInizio.setHours(oraInizio, minutiInizio, 0, 0);
-           
-           const dataFine = new Date(dataInizio.getTime() + durataTotaleMinuti * 60 * 1000);
-           
-           const oreFine = dataFine.getHours().toString().padStart(2, '0');
-           const minutiFine = dataFine.getMinutes().toString().padStart(2, '0');
-           let orarioFineDisplay = `${oreFine}:${minutiFine}`;
-           
-           if (dataFine.getDate() !== dataInizio.getDate()) {
-               const giornoSuccessivo = dataFine.getDate();
-               orarioFineDisplay += ` (g.${giornoSuccessivo})`;
-           }
-           
-           card.find('.orario-fine-display').html(orarioFineDisplay);
-       } else {
+       const dataLavorazione = $('#data-lavorazione').val();
+       if (!dataLavorazione) {
            card.find('.orario-fine-display').html('');
+           return;
        }
-   };
+       
+       const [oraInizio, minutiInizio] = orarioInizio.split(':').map(n => parseInt(n));
+       const dataInizio = new Date(dataLavorazione);
+       dataInizio.setHours(oraInizio, minutiInizio, 0, 0);
+       
+       const dataFine = new Date(dataInizio.getTime() + durataTotaleMinuti * 60 * 1000);
+       
+       // Arrotonda al quarto d'ora superiore
+       const minutiFine = dataFine.getMinutes();
+       const minutiArrotondati = Math.ceil(minutiFine / 15) * 15;
+       if (minutiArrotondati === 60) {
+           dataFine.setHours(dataFine.getHours() + 1, 0, 0, 0);
+       } else {
+           dataFine.setMinutes(minutiArrotondati, 0, 0);
+       }
+       
+       const oreFine = dataFine.getHours().toString().padStart(2, '0');
+       const minutiFineStr = dataFine.getMinutes().toString().padStart(2, '0');
+       let orarioFineDisplay = `${oreFine}:${minutiFineStr}`;
+       
+       if (dataFine.getDate() !== dataInizio.getDate()) {
+           const giornoSuccessivo = dataFine.getDate();
+           orarioFineDisplay += ` (g.${giornoSuccessivo})`;
+       }
+       
+       card.find('.orario-fine-display').html(orarioFineDisplay);
+       
+       // Aggiorna orario successivo con stessa linea
+       updateNextSupplierTime(index, `${oreFine}:${minutiFineStr}`);
+   } else {
+       card.find('.orario-fine-display').html('');
+   }
+};
 
-   // Gestione colori bio con nuovi colori combinazioni
+// Nuova funzione per aggiornare l'orario del fornitore successivo
+function updateNextSupplierTime(currentIndex, endTime) {
+   const currentCard = $(`.supplier-card[data-supplier-index="${currentIndex}"]`);
+   const currentLinea = currentCard.find('.linea-trasformazione').val();
+   
+   if (!currentLinea) return;
+   
+   // Trova il fornitore successivo con la stessa linea
+   let nextSupplier = null;
+   let nextIndex = currentIndex + 1;
+   
+   $('.supplier-card').each(function() {
+       const index = $(this).data('supplier-index');
+       const linea = $(this).find('.linea-trasformazione').val();
+       
+       if (index > currentIndex && linea === currentLinea) {
+           if (!nextSupplier || index < nextSupplier.data('supplier-index')) {
+               nextSupplier = $(this);
+           }
+       }
+   });
+   
+   // Se trova un fornitore successivo con stessa linea, aggiorna il suo orario di inizio
+   if (nextSupplier) {
+       const orarioInizioField = nextSupplier.find('.orario-inizio');
+       // Aggiorna solo se il campo è vuoto o se non è stato modificato manualmente di recente
+       if (!orarioInizioField.val() || !orarioInizioField.data('manually-changed')) {
+           orarioInizioField.val(endTime);
+           calculateEndTime(nextSupplier.data('supplier-index'));
+       }
+   }
+}   // Gestione colori bio con nuovi colori combinazioni
 window.updateBioStyles = function(index) {
    const card = $(`.supplier-card[data-supplier-index="${index}"]`);
    const certificazione = card.find('.certificazione-prodotto').val();
