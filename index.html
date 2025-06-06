@@ -1989,7 +1989,7 @@ $(document).ready(function() {
        }
    }
 
-   // Sezione riepilogo con giallo uguale alle altre caselle e calcolo concentrato
+   // Sezione riepilogo con giallo uguale alle altre caselle e calcolo concentrato - MODIFICATA
    function updateSummarySection() {
        let totalSeconda = 0;
        let totalTorchiato = 0;
@@ -2083,6 +2083,7 @@ $(document).ready(function() {
                            <span>Quantità:</span>
                            <span class="summary-value">${totalTorchiato.toFixed(1)} kg</span>
                        </div>
+                       <!-- Q. Concentrato spostata subito dopo Quantità -->
                        <div class="summary-item">
                            <span>Q. Concentrato:</span>
                            <input type="text" class="summary-input concentrato-field" id="quantita-concentrato" readonly>
@@ -2140,6 +2141,8 @@ $(document).ready(function() {
            }
            
            summarySection.html(summaryHtml);
+           
+           // Calcola concentrato iniziale
            updateConcentrato();
        } else {
            summarySection.addClass('hidden-field');
@@ -2162,6 +2165,7 @@ $(document).ready(function() {
        return $(`.supplier-card[data-supplier-index="${maxIndex}"]`);
    }
 
+   // MODIFICATA: Applica combinazione con nuovo sistema di visualizzazione
    function applyCombination(color) {
        const selectedCombo = $(`#combinazione-fornitori-${color}`).val();
        if (!selectedCombo) {
@@ -2173,6 +2177,7 @@ $(document).ready(function() {
        let combinationDetails = [];
        let combinationSupplierIndexes = indexes.map(i => parseInt(i));
        
+       // Raccogli dettagli di ogni fornitore nella combinazione
        indexes.forEach(index => {
            const card = $(`.supplier-card[data-supplier-index="${index}"]`);
            
@@ -2203,30 +2208,40 @@ $(document).ready(function() {
        const lastSupplierInCombo = getLastSupplierInCombination(selectedCombo);
        if (lastSupplierInCombo.length > 0) {
            const lastSupplierIndex = lastSupplierInCombo.data('supplier-index');
+           
+           // Trova la quantità del fornitore finale nella combinazione
            const lastSupplierDetail = combinationDetails.find(d => d.supplierIndex === lastSupplierIndex);
            const lastSupplierQty = lastSupplierDetail ? parseFloat(lastSupplierDetail.risultato) : 0;
+           
+           // Calcola il totale della combinazione
            const totalCombination = combinationDetails.reduce((sum, detail) => 
                sum + parseFloat(detail.risultato), 0);
            
            const quantitaPrimaField = lastSupplierInCombo.find('.quantita-prima');
+           
+           // NUOVA LOGICA: Mostra solo la quantità del fornitore finale
            quantitaPrimaField.val(lastSupplierQty.toFixed(1));
            quantitaPrimaField.addClass('combination-result');
            quantitaPrimaField.attr('data-combination-type', color);
            
+           // Crea i dettagli della combinazione da mostrare sotto il campo
            const combinationText = combinationDetails.map(detail => 
                `F${detail.supplierIndex}= ${detail.risultato}kg`
            ).join(' + ');
            const totalText = `Totale ${totalCombination.toFixed(1)}kg`;
            
+           // Mostra i dettagli sotto il campo succo 1ª
            const combinationDetailsContainer = lastSupplierInCombo.find('.combination-details');
            combinationDetailsContainer.removeClass('hidden-field');
            combinationDetailsContainer.html(`<strong>Combinazione ${color.charAt(0).toUpperCase() + color.slice(1)}:</strong><br/>${combinationText}<br/><strong>${totalText}</strong>`);
            
+           // Applica colori a tutti i fornitori della combinazione
            indexes.forEach(index => {
                const card = $(`.supplier-card[data-supplier-index="${index}"]`);
                card.addClass(`combination-${color}`);
                card.find('.supplier-header').addClass(`combination-${color}`);
                
+               // Aggiorna header con simbolo colore
                const currentHeader = card.find('.supplier-header').text();
                const colorSymbol = color === 'verde' ? '(V)' : color === 'azzurro' ? '(A)' : '(P)';
                if (!currentHeader.includes('(V)') && !currentHeader.includes('(A)') && !currentHeader.includes('(P)')) {
@@ -2234,6 +2249,7 @@ $(document).ready(function() {
                }
            });
            
+           // Salva combinazione
            combinationData[color] = {
                indexes: combinationSupplierIndexes,
                details: combinationDetails
@@ -2248,6 +2264,7 @@ $(document).ready(function() {
    }
 
    function resetCombination(color) {
+       // Rimuovi colori da tutti i fornitori della combinazione
        if (combinationData[color] && combinationData[color].indexes.length > 0) {
            combinationData[color].indexes.forEach(index => {
                const card = $(`.supplier-card[data-supplier-index="${index}"]`);
@@ -2258,6 +2275,7 @@ $(document).ready(function() {
                    card.removeClass(`combination-${color}`);
                    card.find('.supplier-header').removeClass(`combination-${color}`);
                    
+                   // Rimuovi simbolo colore dall'header
                    const currentHeader = card.find('.supplier-header').html();
                    const cleanHeader = currentHeader.replace(/\s*\([VAP]\)/, '');
                    card.find('.supplier-header').html(cleanHeader);
@@ -2265,8 +2283,10 @@ $(document).ready(function() {
                    quantitaPrimaField.removeClass('combination-result');
                    quantitaPrimaField.removeAttr('data-combination-type');
                    
+                   // Nascondi e reset dettagli combinazione
                    card.find('.combination-details').addClass('hidden-field').html('');
                    
+                   // Ricalcola valore normale
                    const cardIndex = card.data('supplier-index');
                    calculateSupplier(cardIndex);
                    updateDistributionTotal(cardIndex);
@@ -2276,6 +2296,8 @@ $(document).ready(function() {
        }
        
        $(`#combinazione-fornitori-${color}`).val('');
+       
+       // Reset dati combinazione
        combinationData[color] = { indexes: [], details: [] };
        
        const colorText = color.charAt(0).toUpperCase() + color.slice(1);
@@ -2345,6 +2367,7 @@ $(document).ready(function() {
            
            const receivedTransfers = transferData[index] || [];
            
+           // Determina colore combinazione
            let combinationColor = '';
            ['verde', 'azzurro', 'viola'].forEach(color => {
                if ($(this).hasClass(`combination-${color}`)) {
@@ -2405,19 +2428,24 @@ $(document).ready(function() {
        return data;
    }
 
+   // MIGLIORATO: Salvataggio su file con possibilità di scegliere cartella
    function saveToFile() {
        try {
            const data = collectProgramData();
            const dataString = JSON.stringify(data, null, 2);
            
+           // Crea nome file con data
            const today = new Date();
            const dateString = today.toISOString().split('T')[0];
            const agrume = data.tipoAgrume || 'programma';
            const filename = `programma_${agrume}_${dateString}.json`;
            
+           // Verifica se il browser supporta showSaveFilePicker (Chrome 86+)
            if ('showSaveFilePicker' in window) {
+               // Usa File System Access API per salvare dove vuole l'utente
                saveWithFileSystemAPI(dataString, filename);
            } else {
+               // Fallback al download tradizionale
                saveWithDownloadFallback(dataString, filename);
            }
            
@@ -2426,6 +2454,7 @@ $(document).ready(function() {
        }
    }
 
+   // Salvataggio moderno con possibilità di scegliere cartella
    async function saveWithFileSystemAPI(dataString, filename) {
        try {
            const fileHandle = await window.showSaveFilePicker({
@@ -2444,11 +2473,13 @@ $(document).ready(function() {
        } catch (error) {
            if (error.name !== 'AbortError') {
                showSaveStatus('Errore durante il salvataggio: ' + error.message, 'error');
+               // Fallback al download tradizionale
                saveWithDownloadFallback(dataString, filename);
            }
        }
    }
 
+   // Fallback per browser che non supportano File System Access API
    function saveWithDownloadFallback(dataString, filename) {
        const blob = new Blob([dataString], { type: 'application/json' });
        const url = URL.createObjectURL(blob);
@@ -2463,10 +2494,12 @@ $(document).ready(function() {
        showSaveStatus(`File ${filename} salvato nella cartella Download!`, 'success');
    }
 
+   // NUOVO: Caricamento file
    function loadFromFile() {
        $('#file-input').click();
    }
 
+   // Gestione caricamento file
    $('#file-input').change(function(e) {
        const file = e.target.files[0];
        if (!file) return;
@@ -2487,20 +2520,26 @@ $(document).ready(function() {
            }
        };
        reader.readAsText(file);
+       
+       // Reset dell'input file
        $(this).val('');
    });
 
    function loadDataFromObject(data) {
+       // Ripristina dati base
        $('#tipo-agrume-giornaliero').val(data.tipoAgrume || '');
        $('#data-lavorazione').val(data.dataLavorazione || '');
        $('#selected-agrume').text(data.tipoAgrume || 'N/D');
        
+       // Ripristina transfer e combination data
        transferData = data.transferData || {};
        combinationData = data.combinationData || { verde: { indexes: [], details: [] }, azzurro: { indexes: [], details: [] }, viola: { indexes: [], details: [] } };
        
+       // Rimuovi fornitori esistenti
        $('.supplier-card').remove();
        supplierCount = 0;
        
+       // Ripristina fornitori
        if (data.fornitori && data.fornitori.length > 0) {
            data.fornitori.forEach(fornitore => {
                const index = fornitore.supplierIndex;
@@ -2511,7 +2550,7 @@ $(document).ready(function() {
                
                const card = $(`.supplier-card[data-supplier-index="${index}"]`);
                
-               // Ripristina tutti i dati del fornitore
+               // Ripristina dati fornitore
                card.find('.nome-fornitore').val(fornitore.nome || '');
                card.find('.altro-fornitore').val(fornitore.altroNome || '');
                card.find('.quantita-fornitore').val(fornitore.quantitaEntrata || '');
@@ -2526,9 +2565,13 @@ $(document).ready(function() {
                card.find('.orario-inizio').val(fornitore.orarioInizio || '');
                card.find('.orario-fine-display').html(fornitore.orarioFineDisplay || '');
                
+               // Rese
                card.find('.resa-prima').val(fornitore.rese?.prima || 0);
+               
+               // Quantità prodotti
                card.find('.quantita-prima').val(fornitore.quantitaProdotti?.prima || 0);
                
+               // Caratteristiche
                if (fornitore.caratteristicheProdotti?.prima) {
                    const prima = fornitore.caratteristicheProdotti.prima;
                    card.find('.tenore-polpa-prima').val(prima.tenorePolpa || 'STANDARD');
@@ -2542,6 +2585,7 @@ $(document).ready(function() {
                    card.find('.quantita-concentrato-prima').val(prima.quantitaConcentrato || '');
                }
                
+               // Destinazioni
                if (fornitore.destinazioni?.prima) {
                    const destinazioni = fornitore.destinazioni.prima.split(', ').filter(d => d);
                    const select = card.find('.destinazione-prima')[0];
@@ -2555,6 +2599,7 @@ $(document).ready(function() {
                }
                card.find('.altra-destinazione').val(fornitore.destinazioni?.primaAltro || '');
                
+               // Gestisci campi altro
                if (fornitore.nome === 'ALTRO') {
                    card.find('.altro-fornitore').removeClass('hidden-field');
                }
@@ -2565,17 +2610,21 @@ $(document).ready(function() {
                    card.find('.altra-varieta').removeClass('hidden-field');
                }
                
+               // Aggiorna nome nel header
                updateSupplierName(index);
                
+               // Inizializza Select2
                card.find('.destinazione-prima').select2({
                    placeholder: "Seleziona fino a 3 destinazioni",
                    maximumSelectionLength: 3
                });
                
+               // Aggiorna stili e calcoli
                updateBioStyles(index);
                updateDistributionSection(index);
                updateSupplierConcentrato(index);
                
+               // Ripristina distribuzione
                if (fornitore.distributionData) {
                    Object.entries(fornitore.distributionData).forEach(([dest, qty]) => {
                        card.find(`.distribution-qty[data-dest="${dest}"]`).val(qty);
@@ -2583,6 +2632,7 @@ $(document).ready(function() {
                    updateDistributionTotal(index);
                }
                
+               // Gestisci combinazioni con colori
                if (fornitore.hasCombination && fornitore.combinationColor) {
                    card.find('.quantita-prima').addClass('combination-result');
                    card.find('.quantita-prima').attr('data-combination-type', fornitore.combinationColor);
@@ -2597,11 +2647,13 @@ $(document).ready(function() {
                        card.find('.supplier-header').html(currentHeader + ' ' + colorSymbol);
                    }
                    
+                   // Ripristina dettagli combinazione
                    if (fornitore.combinationDetails) {
                        card.find('.combination-details').removeClass('hidden-field').html(fornitore.combinationDetails);
                    }
                }
                
+               // Gestisci trasferimenti ricevuti
                if (fornitore.hasReceivedTransfers) {
                    card.find('.quantita-prima').addClass('received-transfer');
                    
@@ -2618,6 +2670,7 @@ $(document).ready(function() {
            });
        }
        
+       // Ripristina totali seconda e torchiato
        if (data.totaliSeconda) {
            const seconda = data.totaliSeconda;
            $('#destinazione-seconda-totale').val(seconda.destinazione || '');
@@ -2639,6 +2692,7 @@ $(document).ready(function() {
            $('#quantita-concentrato').val(torchiato.quantitaConcentrato || '');
        }
        
+       // Aggiorna tutto
        updateTotals();
        updateSuppliersCount();
        updateCombinazioneOptions();
@@ -2698,6 +2752,7 @@ $(document).ready(function() {
        const newCard = createSupplierCard(supplierCount);
        $('#suppliers-container').append(newCard);
        
+       // Inizializza Select2 per destinazioni multiple
        const card = $(`.supplier-card[data-supplier-index="${supplierCount}"]`);
        card.find('.destinazione-prima').select2({
            placeholder: "Seleziona fino a 3 destinazioni",
@@ -2710,6 +2765,7 @@ $(document).ready(function() {
        updateAllTransferOptions();
    });
 
+   // Eventi combinazioni con colori
    $('#applica-combinazione-verde').click(function() {
        applyCombination('verde');
    });
@@ -2734,6 +2790,7 @@ $(document).ready(function() {
        resetCombination('viola');
    });
 
+   // Eventi salvataggio e caricamento file
    $('#salva-file').click(function() {
        saveToFile();
    });
@@ -2756,3 +2813,6 @@ $(document).ready(function() {
 
    console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Versione con stampa completamente corretta');
 });
+</script>
+</body>
+</html>
