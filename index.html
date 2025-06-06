@@ -181,10 +181,10 @@ body {
    color: #000000;
 }
 
-/* 6 colonne fornitori su una riga */
+/* 5 colonne fornitori su una riga per stampa più leggibile */
 .suppliers-container {
    display: grid;
-   grid-template-columns: repeat(6, 1fr);
+   grid-template-columns: repeat(5, 1fr);
    gap: 10px;
    margin-bottom: 20px;
 }
@@ -195,7 +195,7 @@ body {
    border-radius: 5px;
    padding: 12px;
    page-break-inside: avoid;
-   min-height: 500px;
+   min-height: 520px;
 }
 
 /* COLORI COMBINAZIONI */
@@ -409,17 +409,6 @@ body {
    text-align: center;
 }
 
-.footer {
-   text-align: center;
-   margin-top: 20px;
-   font-size: 16px;
-   color: #000000;
-   background-color: #e9ecef;
-   padding: 10px;
-   border: 1px solid #000000;
-   border-radius: 5px;
-}
-
 .transfer-details, .distribution-details {
    font-size: 11px;
    color: #000000;
@@ -567,14 +556,32 @@ body {
    margin-bottom: 15px;
 }
 
-/* MIGLIORATA: Stampa con caratteri grandi e leggibili */
+/* Stili per dettagli combinazione */
+.combination-details {
+   font-size: 10px;
+   color: #856404;
+   background-color: rgba(255, 193, 7, 0.3);
+   padding: 5px;
+   border-radius: 3px;
+   margin-top: 3px;
+   border: 1px solid #ffc107;
+   line-height: 1.2;
+}
+
+.combination-details strong {
+   display: block;
+   margin-bottom: 2px;
+}
+
+/* MIGLIORATA: Stampa con caratteri enormi e colori mantenuti */
 @media print {
    body { 
-       margin: 8mm;
+       margin: 5mm;
        background-color: #ffffff !important;
-       font-size: 20px !important;
-       line-height: 1.3;
+       font-size: 34px !important;
+       line-height: 1.2 !important;
        color: #000000 !important;
+       font-weight: bold !important;
    }
    
    .controls-section {
@@ -590,222 +597,253 @@ body {
    }
    
    .header {
-       background: #ffffff !important;
-       color: #000000 !important;
-       border: 3px solid #000000 !important;
-       padding: 20px !important;
-       margin-bottom: 15px !important;
+       background: #1e3c72 !important;
+       color: #ffffff !important;
+       border: 4px solid #000000 !important;
+       padding: 30px !important;
+       margin-bottom: 25px !important;
    }
    
    .header h1 {
+       font-size: 52px !important;
+       color: #ffffff !important;
+       font-weight: 900 !important;
+       text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
+   }
+   
+   .header .subtitle {
+       font-size: 38px !important;
+       color: #ffffff !important;
+       font-weight: bold !important;
+       text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
+   }
+   
+   .header-info {
+       font-size: 32px !important;
+       color: #ffffff !important;
+       font-weight: bold !important;
+       text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
+   }
+   
+   .totals-section {
+       background-color: #ffc107 !important;
+       border: 3px solid #000000 !important;
+       padding: 25px !important;
+       margin-bottom: 25px !important;
+   }
+   
+   .total-value {
+       font-size: 48px !important;
+       color: #000000 !important;
+       font-weight: 900 !important;
+       text-shadow: 1px 1px 2px rgba(255,255,255,0.8) !important;
+   }
+   
+   .total-label {
        font-size: 32px !important;
        color: #000000 !important;
        font-weight: bold !important;
    }
    
-   .header .subtitle {
-       font-size: 24px !important;
-       color: #000000 !important;
-   }
-   
-   .header-info {
-       font-size: 22px !important;
-       color: #000000 !important;
-   }
-   
-   .totals-section {
-       background-color: #f0f0f0 !important;
-       border: 2px solid #000000 !important;
-       padding: 15px !important;
-       margin-bottom: 15px !important;
-   }
-   
-   .total-value {
-       font-size: 28px !important;
-       color: #000000 !important;
-   }
-   
-   .total-label {
-       font-size: 20px !important;
-       color: #000000 !important;
-   }
-   
    .suppliers-container {
-       grid-template-columns: repeat(6, 1fr) !important;
-       gap: 8px !important;
+       grid-template-columns: repeat(5, 1fr) !important;
+       gap: 12px !important;
    }
    
    .supplier-card {
-       font-size: 16px !important;
-       padding: 12px !important;
-       background-color: #ffffff !important;
-       border: 2px solid #000000 !important;
+       font-size: 24px !important;
+       padding: 18px !important;
+       background-color: #e9ecef !important;
+       border: 3px solid #000000 !important;
        page-break-inside: avoid;
+       font-weight: bold !important;
    }
    
    .supplier-card.combination-verde {
-       background-color: #e8f5e9 !important;
-       border: 3px solid #28a745 !important;
+       background-color: #d4edda !important;
+       border: 4px solid #28a745 !important;
    }
    
    .supplier-card.combination-azzurro {
-       background-color: #e1f5fe !important;
-       border: 3px solid #17a2b8 !important;
+       background-color: #d1ecf1 !important;
+       border: 4px solid #17a2b8 !important;
    }
    
    .supplier-card.combination-viola {
-       background-color: #f3e5f5 !important;
-       border: 3px solid #6f42c1 !important;
+       background-color: #e2e3f3 !important;
+       border: 4px solid #6f42c1 !important;
    }
    
    .supplier-header {
-       background: #f0f0f0 !important;
-       color: #000000 !important;
-       font-size: 20px !important;
-       font-weight: bold !important;
-       padding: 10px !important;
-       border-bottom: 2px solid #000000 !important;
+       background: #6c757d !important;
+       color: #ffffff !important;
+       font-size: 30px !important;
+       font-weight: 900 !important;
+       padding: 15px !important;
+       border-bottom: 3px solid #000000 !important;
        text-align: center !important;
+       text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
    }
    
    .supplier-header.combination-verde {
-       background: #d4edda !important;
-       color: #000000 !important;
+       background: #28a745 !important;
+       color: #ffffff !important;
    }
    
    .supplier-header.combination-azzurro {
-       background: #d1ecf1 !important;
-       color: #000000 !important;
+       background: #17a2b8 !important;
+       color: #ffffff !important;
    }
    
    .supplier-header.combination-viola {
-       background: #e2e3f3 !important;
-       color: #000000 !important;
+       background: #6f42c1 !important;
+       color: #ffffff !important;
    }
    
    .form-row {
-       margin-bottom: 8px !important;
+       margin-bottom: 12px !important;
    }
    
    .form-label {
-       font-size: 16px !important;
-       font-weight: bold !important;
+       font-size: 24px !important;
+       font-weight: 900 !important;
        color: #000000 !important;
+       text-shadow: 0.5px 0.5px 1px rgba(255,255,255,0.8) !important;
    }
    
    .form-input input,
    .form-input select,
    .form-input textarea {
-       font-size: 15px !important;
-       padding: 6px !important;
-       border: 1px solid #000000 !important;
+       font-size: 22px !important;
+       padding: 10px !important;
+       border: 2px solid #000000 !important;
        background-color: #ffffff !important;
        color: #000000 !important;
+       font-weight: bold !important;
    }
    
    .calculated-field,
    .yield-result {
-       background-color: #f8f9fa !important;
-       font-weight: bold !important;
-       border: 2px solid #000000 !important;
+       background-color: #e7f3ff !important;
+       font-weight: 900 !important;
+       border: 3px solid #2a5298 !important;
+       color: #1e3c72 !important;
    }
    
    .bio-red-field {
        color: #dc3545 !important;
-       font-weight: bold !important;
-       border: 2px solid #dc3545 !important;
+       font-weight: 900 !important;
+       border: 3px solid #dc3545 !important;
+       background-color: #f8d7da !important;
    }
    
    .bio-black-field {
        color: #000000 !important;
-       font-weight: bold !important;
-       border: 2px solid #000000 !important;
+       font-weight: 900 !important;
+       border: 3px solid #000000 !important;
+       background-color: #f8f9fa !important;
    }
    
    .bio-red-text {
        color: #dc3545 !important;
-       font-weight: bold !important;
+       font-weight: 900 !important;
+       text-shadow: 0.5px 0.5px 1px rgba(255,255,255,0.8) !important;
    }
    
    .bio-black-text {
        color: #000000 !important;
-       font-weight: bold !important;
+       font-weight: 900 !important;
+       text-shadow: 0.5px 0.5px 1px rgba(255,255,255,0.8) !important;
    }
    
    .combination-result {
        background-color: #fff3cd !important;
-       border: 3px solid #ffc107 !important;
-       color: #000000 !important;
-       font-weight: bold !important;
+       border: 4px solid #ffc107 !important;
+       color: #856404 !important;
+       font-weight: 900 !important;
    }
    
    .received-transfer {
        background-color: #d4edda !important;
-       border: 3px solid #28a745 !important;
+       border: 4px solid #28a745 !important;
    }
    
    .summary-section {
        page-break-before: auto;
-       margin-top: 15px !important;
+       margin-top: 25px !important;
    }
    
    .summary-box {
-       background: #f5f5f5 !important;
-       border: 2px solid #000000 !important;
-       padding: 15px !important;
+       background: #ffc107 !important;
+       border: 3px solid #000000 !important;
+       padding: 25px !important;
+       color: #000000 !important;
    }
    
    .summary-title {
-       font-size: 22px !important;
+       font-size: 34px !important;
        color: #000000 !important;
-       background-color: #e0e0e0 !important;
-       padding: 8px !important;
+       background-color: rgba(255, 255, 255, 0.8) !important;
+       padding: 12px !important;
+       font-weight: 900 !important;
+       border: 2px solid #000000 !important;
    }
    
    .summary-item {
-       font-size: 18px !important;
+       font-size: 26px !important;
        color: #000000 !important;
-       margin-bottom: 8px !important;
+       margin-bottom: 12px !important;
+       font-weight: bold !important;
    }
    
    .summary-value {
-       font-size: 20px !important;
+       font-size: 30px !important;
        color: #000000 !important;
        background-color: #ffffff !important;
-       border: 1px solid #000000 !important;
+       border: 2px solid #000000 !important;
+       font-weight: 900 !important;
    }
    
    .summary-input,
    .summary-textarea {
-       font-size: 16px !important;
-       border: 1px solid #000000 !important;
+       font-size: 24px !important;
+       border: 2px solid #000000 !important;
        background-color: #ffffff !important;
        color: #000000 !important;
-   }
-   
-   .footer {
-       background-color: #f0f0f0 !important;
-       border: 2px solid #000000 !important;
-       font-size: 18px !important;
-       color: #000000 !important;
-       page-break-before: auto;
+       font-weight: bold !important;
    }
    
    .transfer-details,
    .distribution-details {
-       font-size: 14px !important;
-       color: #000000 !important;
-       background-color: #f0f0f0 !important;
-       border: 1px solid #000000 !important;
+       font-size: 20px !important;
+       color: #155724 !important;
+       background-color: #d4edda !important;
+       border: 2px solid #28a745 !important;
+       font-weight: bold !important;
+   }
+   
+   .combination-details {
+       font-size: 18px !important;
+       color: #856404 !important;
+       background-color: #fff3cd !important;
+       border: 2px solid #ffc107 !important;
+       font-weight: bold !important;
    }
    
    .section-divider {
-       border-bottom: 2px solid #000000 !important;
-       margin: 8px 0 !important;
+       border-bottom: 3px solid #000000 !important;
+       margin: 12px 0 !important;
+   }
+   
+   .concentrato-field {
+       background-color: #e7f3ff !important;
+       font-weight: 900 !important;
+       border: 3px solid #2a5298 !important;
+       color: #1e3c72 !important;
    }
    
    @page {
-       margin: 10mm;
+       margin: 8mm;
        size: A4 landscape;
    }
 }
@@ -945,11 +983,6 @@ body {
        <!-- Il riepilogo verrà generato dinamicamente -->
    </div>
 
-   <div class="footer">
-       <p><strong>Documento generato automaticamente - Sistema di Gestione Produzione Simone Gatto</strong></p>
-       <p><strong>Legenda:</strong> (V) = Combinazione Verde | (A) = Combinazione Azzurro | (P) = Combinazione Viola | (T) = Trasferimenti</p>
-   </div>
-
    <!-- Input file nascosto per caricamento -->
    <input type="file" id="file-input" accept=".json" style="display: none;">
 
@@ -1064,6 +1097,22 @@ $(document).ready(function() {
    function getYieldByLine(linea) {
        return yieldsPerLine[linea] || 30; // Valore di default se la linea non è trovata
    }
+
+   // Funzione per aggiornare il concentrato del fornitore
+   window.updateSupplierConcentrato = function(index) {
+       const card = $(`.supplier-card[data-supplier-index="${index}"]`);
+       const quantitaPrima = parseFloat(card.find('.quantita-prima').val()) || 0;
+       const brix = card.find('.brix-prima').val();
+       
+       if (brix && brix !== 'NAT') {
+           const concentrato = calculateConcentrato(quantitaPrima, brix);
+           card.find('.quantita-concentrato-prima').val(concentrato + ' kg');
+           card.find('.concentrato-prima-row').removeClass('hidden-field');
+       } else {
+           card.find('.quantita-concentrato-prima').val('');
+           card.find('.concentrato-prima-row').addClass('hidden-field');
+       }
+   };
 
    // Crea card fornitore
    function createSupplierCard(index) {
@@ -1208,8 +1257,10 @@ $(document).ready(function() {
                <div class="form-row">
                    <span class="form-label">Succo 1ª (kg):</span>
                    <div class="form-input">
-                       <input type="number" class="quantita-prima yield-result" readonly>
+                       <input type="number" class="quantita-prima yield-result" readonly onchange="updateSupplierConcentrato(${index})">
                        <div class="transfer-details hidden-field" style="font-size: 10px; margin-top: 2px;"></div>
+                       <!-- Dettagli combinazione -->
+                       <div class="combination-details hidden-field"></div>
                    </div>
                </div>
 
@@ -1285,7 +1336,7 @@ $(document).ready(function() {
                <div class="form-row">
                    <span class="form-label">°BX:</span>
                    <div class="form-input">
-                       <select class="brix-prima" onchange="toggleAltroBrix(${index}, 'prima')">
+                       <select class="brix-prima" onchange="toggleAltroBrix(${index}, 'prima'); updateSupplierConcentrato(${index});">
                            <option value="NAT">NAT</option>
                            <option value="20">20</option>
                            <option value="32">32</option>
@@ -1297,6 +1348,14 @@ $(document).ready(function() {
                            <option value="65">65</option>
                            <option value="ALTRO">ALTRO</option>
                        </select>
+                   </div>
+               </div>
+
+               <!-- Campo Q. Concentrato del fornitore -->
+               <div class="form-row concentrato-prima-row hidden-field">
+                   <span class="form-label">Q. Concentrato:</span>
+                   <div class="form-input">
+                       <input type="text" class="quantita-concentrato-prima concentrato-field" readonly>
                    </div>
                </div>
 
@@ -1405,6 +1464,7 @@ $(document).ready(function() {
        updateTotals();
        updateSummarySection();
        updateDistributionTotal(index);
+       updateSupplierConcentrato(index);
    };
 
    window.calculateEndTime = function(index) {
@@ -1689,6 +1749,7 @@ $(document).ready(function() {
        
        updateDistributionTotal(targetIndex);
        updateDistributionTotal(sourceIndex);
+       updateSupplierConcentrato(targetIndex);
        
        alert(`Trasferimento completato!\n${transferAmount} kg trasferiti da F${sourceIndex} (${sourceName}) a F${targetIndex} (${targetName})\nNuova quantità F${targetIndex}: ${newTargetQty.toFixed(1)} kg`);
    };
@@ -1764,9 +1825,14 @@ $(document).ready(function() {
            card.find('.conservato-prima').val('NO');
            card.find('.note-prima').val('');
            
+           // Reset concentrato
+           card.find('.quantita-concentrato-prima').val('');
+           card.find('.concentrato-prima-row').addClass('hidden-field');
+           
            // Reset sezioni
            card.find('.distribution-section').addClass('hidden-field');
            card.find('.transfer-details').addClass('hidden-field').html('');
+           card.find('.combination-details').addClass('hidden-field').html('');
            
            // Reset nome header
            card.find('.supplier-name').text('Nuovo Fornitore');
@@ -1902,7 +1968,7 @@ $(document).ready(function() {
        }
    }
 
-   // Sezione riepilogo con giallo uguale alle altre caselle e calcolo concentrato
+   // Sezione riepilogo con giallo uguale alle altre caselle e calcolo concentrato - MODIFICATA
    function updateSummarySection() {
        let totalSeconda = 0;
        let totalTorchiato = 0;
@@ -1995,6 +2061,11 @@ $(document).ready(function() {
                            <span>Quantità:</span>
                            <span class="summary-value">${totalTorchiato.toFixed(1)} kg</span>
                        </div>
+                       <!-- Q. Concentrato spostata subito dopo Quantità -->
+                       <div class="summary-item">
+                           <span>Q. Concentrato:</span>
+                           <input type="text" class="summary-input concentrato-field" id="quantita-concentrato" readonly>
+                       </div>
                        <div class="summary-item">
                            <span>Destinazione:</span>
                            <input type="text" class="summary-input" id="destinazione-torchiato-totale" placeholder="Destinazione" value="CONCENTRATO">
@@ -2024,10 +2095,6 @@ $(document).ready(function() {
                                <option value="60">60</option>
                                <option value="65">65</option>
                            </select>
-                       </div>
-                       <div class="summary-item">
-                           <span>Quantità Concentrato:</span>
-                           <input type="text" class="summary-input concentrato-field" id="quantita-concentrato" readonly>
                        </div>
                        <div class="summary-item">
                            <span>Pastorizzato:</span>
@@ -2062,7 +2129,8 @@ $(document).ready(function() {
 
    // Funzione per aggiornare il calcolo del concentrato
    window.updateConcentrato = function() {
-       const quantitaTorchiato = parseFloat($('#summary-section .summary-value').text()) || 0;
+       const summaryValue = $('#summary-section .summary-value').eq($('#summary-section .summary-value').length - 1);
+       const quantitaTorchiato = parseFloat(summaryValue.text()) || 0;
        const brix = $('#brix-torchiato-totale').val();
        const concentrato = calculateConcentrato(quantitaTorchiato, brix);
        $('#quantita-concentrato').val(concentrato + ' kg');
@@ -2075,6 +2143,7 @@ $(document).ready(function() {
        return $(`.supplier-card[data-supplier-index="${maxIndex}"]`);
    }
 
+   // MODIFICATA: Funzione per applicare combinazione con dettagli individuali + somma
    function applyCombination(color) {
        const selectedCombo = $(`#combinazione-fornitori-${color}`).val();
        if (!selectedCombo) {
@@ -2087,6 +2156,7 @@ $(document).ready(function() {
        let combinationDetails = [];
        let combinationSupplierIndexes = indexes.map(i => parseInt(i));
        
+       // Raccogli dati da tutti i fornitori della combinazione
        indexes.forEach(index => {
            const card = $(`.supplier-card[data-supplier-index="${index}"]`);
            
@@ -2100,7 +2170,8 @@ $(document).ready(function() {
            const resaPrima = parseFloat(card.find('.resa-prima').val()) || 0;
            
            if (quantitaTrasformata > 0) {
-               totale += (quantitaTrasformata * resaPrima / 100);
+               const quantitaIndividuale = (quantitaTrasformata * resaPrima / 100);
+               totale += quantitaIndividuale;
                
                combinationDetails.push({
                    nome: nomeFornitore,
@@ -2108,7 +2179,7 @@ $(document).ready(function() {
                    linea: linea,
                    quantita: quantitaTrasformata,
                    resa: resaPrima,
-                   risultato: (quantitaTrasformata * resaPrima / 100).toFixed(1),
+                   risultato: quantitaIndividuale.toFixed(1),
                    supplierIndex: parseInt(index)
                });
            }
@@ -2117,9 +2188,31 @@ $(document).ready(function() {
        const lastSupplierInCombo = getLastSupplierInCombination(selectedCombo);
        if (lastSupplierInCombo.length > 0) {
            const quantitaPrimaField = lastSupplierInCombo.find('.quantita-prima');
-           quantitaPrimaField.val(totale.toFixed(1));
+           
+           // Calcola il valore individuale dell'ultimo fornitore
+      const lastSupplierIndex = lastSupplierInCombo.data('supplier-index');
+           const lastSupplierData = combinationDetails.find(d => d.supplierIndex === lastSupplierIndex);
+           const individualQty = lastSupplierData ? lastSupplierData.risultato : '0';
+           
+           // Imposta il valore del singolo fornitore nel campo principale
+           quantitaPrimaField.val(individualQty);
            quantitaPrimaField.addClass('combination-result');
            quantitaPrimaField.attr('data-combination-type', color);
+           
+           // Crea dettagli combinazione da mostrare sotto il campo
+           const detailsContainer = lastSupplierInCombo.find('.combination-details');
+           detailsContainer.removeClass('hidden-field');
+           
+           // Genera il testo con tutti i dettagli della combinazione
+           const detailsText = combinationDetails.map(detail => 
+               `F${detail.supplierIndex} = ${detail.risultato} kg`
+           ).join(' + ');
+           
+           detailsContainer.html(`
+               <strong>Combinazione ${color.toUpperCase()}:</strong><br>
+               ${detailsText}<br>
+               <strong>Totale = ${totale.toFixed(1)} kg</strong>
+           `);
            
            // Applica colori a tutti i fornitori della combinazione
            indexes.forEach(index => {
@@ -2142,9 +2235,10 @@ $(document).ready(function() {
            };
            
            updateDistributionTotal(lastSupplierInCombo.data('supplier-index'));
+           updateSupplierConcentrato(lastSupplierInCombo.data('supplier-index'));
            
            const colorText = color.charAt(0).toUpperCase() + color.slice(1);
-           alert(`Combinazione ${colorText} applicata! Quantità succo 1ª aggiornata a ${totale.toFixed(1)} kg\n\nDettaglio:\n${combinationDetails.map(d => `F${d.supplierIndex} - ${d.nome}: ${d.quantita}kg × ${d.resa}% = ${d.risultato}kg`).join('\n')}`);
+           alert(`Combinazione ${colorText} applicata!\n\nDettaglio:\n${combinationDetails.map(d => `F${d.supplierIndex} - ${d.nome}: ${d.quantita}kg × ${d.resa}% = ${d.risultato}kg`).join('\n')}\n\nTotale combinazione: ${totale.toFixed(1)} kg\nQuantità F${lastSupplierIndex}: ${individualQty} kg`);
        }
    }
 
@@ -2168,10 +2262,14 @@ $(document).ready(function() {
                    quantitaPrimaField.removeClass('combination-result');
                    quantitaPrimaField.removeAttr('data-combination-type');
                    
-// Ricalcola valore normale
+                   // Nascondi dettagli combinazione
+                   card.find('.combination-details').addClass('hidden-field').html('');
+                   
+                   // Ricalcola valore normale
                    const cardIndex = card.data('supplier-index');
                    calculateSupplier(cardIndex);
                    updateDistributionTotal(cardIndex);
+                   updateSupplierConcentrato(cardIndex);
                }
            });
        }
@@ -2280,6 +2378,7 @@ $(document).ready(function() {
                hasCombination: $(this).find('.quantita-prima').hasClass('combination-result'),
                combinationType: $(this).find('.quantita-prima').attr('data-combination-type') || '',
                combinationColor: combinationColor,
+               combinationDetails: $(this).find('.combination-details').html(),
                hasReceivedTransfers: $(this).find('.quantita-prima').hasClass('received-transfer'),
                receivedTransfers: receivedTransfers,
                distributionData: distributionData,
@@ -2292,7 +2391,8 @@ $(document).ready(function() {
                        bio: $(this).find('.bio-prima').val(),
                        pastorizzato: $(this).find('.pastorizzato-prima').val(),
                        conservato: $(this).find('.conservato-prima').val(),
-                       note: $(this).find('.note-prima').val()
+                       note: $(this).find('.note-prima').val(),
+                       quantitaConcentrato: $(this).find('.quantita-concentrato-prima').val()
                    }
                },
                destinazioni: {
@@ -2461,6 +2561,7 @@ $(document).ready(function() {
                    card.find('.pastorizzato-prima').val(prima.pastorizzato || 'SI');
                    card.find('.conservato-prima').val(prima.conservato || 'NO');
                    card.find('.note-prima').val(prima.note || '');
+                   card.find('.quantita-concentrato-prima').val(prima.quantitaConcentrato || '');
                }
                
                // Destinazioni
@@ -2500,6 +2601,7 @@ $(document).ready(function() {
                // Aggiorna stili e calcoli
                updateBioStyles(index);
                updateDistributionSection(index);
+               updateSupplierConcentrato(index);
                
                // Ripristina distribuzione
                if (fornitore.distributionData) {
@@ -2522,6 +2624,11 @@ $(document).ready(function() {
                    const currentHeader = card.find('.supplier-header').text();
                    if (!currentHeader.includes('(V)') && !currentHeader.includes('(A)') && !currentHeader.includes('(P)')) {
                        card.find('.supplier-header').html(currentHeader + ' ' + colorSymbol);
+                   }
+                   
+                   // Ripristina dettagli combinazione
+                   if (fornitore.combinationDetails) {
+                       card.find('.combination-details').removeClass('hidden-field').html(fornitore.combinationDetails);
                    }
                }
                
@@ -2605,6 +2712,7 @@ $(document).ready(function() {
                const index = $(this).data('supplier-index');
                calculateSupplier(index);
                updateDistributionTotal(index);
+               updateSupplierConcentrato(index);
            });
            
            updateVarietyOptions(agrume);
@@ -2682,7 +2790,7 @@ $(document).ready(function() {
    initCurrentDate();
    updateSuppliersCount();
 
-   console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Versione modificata con pulsanti salva/carica rimossi');
+   console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Versione con combinazioni dettagliate, caratteri enormi per stampa e colori dashboard mantenuti');
 });
 </script>
 </body>
