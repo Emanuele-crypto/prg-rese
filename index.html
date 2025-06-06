@@ -568,7 +568,7 @@ body {
 }
 
 /* REGOLE DI STAMPA COMPLETE E CORRETTE */
-/* REGOLE DI STAMPA CON CARATTERI MOLTO PIÙ GRANDI */
+/* REGOLE DI STAMPA CON CARATTERI MOLTO PIÙ GRANDI E COLORI BIO */
 @media print {
    * {
        font-size: 72px !important;
@@ -643,9 +643,10 @@ body {
        color: #000000 !important;
    }
    
+   /* CAMBIATO DA 5 A 4 COLONNE PER MAGGIORE CHIAREZZA */
    .suppliers-container {
-       grid-template-columns: repeat(5, 1fr) !important;
-       gap: 15px !important;
+       grid-template-columns: repeat(4, 1fr) !important;
+       gap: 20px !important;
    }
    
    .supplier-card {
@@ -744,11 +745,13 @@ body {
        font-size: 72px !important;
    }
    
+   /* COLORI BIO IN STAMPA - ROSSO PER BIO */
    .bio-red-field {
        color: #dc3545 !important;
        font-weight: bold !important;
        border: 4px solid #dc3545 !important;
        font-size: 72px !important;
+       background-color: #ffffff !important;
    }
    
    .bio-black-field {
@@ -756,6 +759,7 @@ body {
        font-weight: bold !important;
        border: 4px solid #000000 !important;
        font-size: 72px !important;
+       background-color: #ffffff !important;
    }
    
    .bio-red-text {
@@ -768,6 +772,36 @@ body {
        color: #000000 !important;
        font-weight: bold !important;
        font-size: 72px !important;
+   }
+   
+   /* ASSICURIAMOCI CHE I CAMPI BIO MANTENGANO I COLORI CORRETTI */
+   .supplier-card .certificazione-prodotto.bio-red-field,
+   .supplier-card .varieta-prodotto.bio-red-field,
+   .supplier-card .linea-trasformazione.bio-red-field,
+   .supplier-card .bio-prima.bio-red-field {
+       color: #dc3545 !important;
+       border-color: #dc3545 !important;
+       font-weight: bold !important;
+   }
+   
+   .supplier-card .certificazione-prodotto.bio-black-field,
+   .supplier-card .varieta-prodotto.bio-black-field,
+   .supplier-card .linea-trasformazione.bio-black-field,
+   .supplier-card .bio-prima.bio-black-field {
+       color: #000000 !important;
+       border-color: #000000 !important;
+       font-weight: bold !important;
+   }
+   
+   /* LABELS BIO CON COLORI CORRETTI */
+   .supplier-card .form-label.bio-red-text {
+       color: #dc3545 !important;
+       font-weight: bold !important;
+   }
+   
+   .supplier-card .form-label.bio-black-text {
+       color: #000000 !important;
+       font-weight: bold !important;
    }
    
    .combination-result {
@@ -885,7 +919,8 @@ body {
        margin: 10mm;
        size: A4 landscape;
    }
-}</style>
+}   
+</style>
 </head>
 
 <body>
