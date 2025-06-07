@@ -929,7 +929,7 @@ body {
        <div class="subtitle">Sistema di Gestione Produzione - Simone Gatto</div>
        <div class="header-info">
            <div><strong>Data:</strong> <span id="current-date"></span></div>
-           <div><strong>Agrume:</strong> <span id="selected-agrume">N/D</span></div>
+           <div><strong>Frutta:</strong> <span id="selected-Frutta">N/D</span></div>
            <div><strong>Fornitori:</strong> <span id="suppliers-count">0</span></div>
        </div>
        <div style="margin-top: 10px; font-size: 16px;">
@@ -1094,6 +1094,7 @@ $(document).ready(function() {
        ],
        'ARANCIA': [
            { value: 'BIONDA', text: 'Bionda' },
+           { value: 'ROSSA', text: 'Bionda' },
            { value: 'MORO', text: 'Moro' },
            { value: 'SANGUINELLA', text: 'Sanguinella' },
            { value: 'TAROCCO', text: 'Tarocco' },
@@ -1116,8 +1117,9 @@ $(document).ready(function() {
 
    // Rese per linea di trasformazione
    const yieldsPerLine = {
-       'GOE EST/400': 31.60,
        'BOE/1100': 31.30,
+       'GOE EST/400': 31.60,
+       '400': 32.00,
        'GOE EST/POLY': 30.60,
        'GOE INT/POLY': 28.30,
        'BIRILLATRICI': 26.60,
@@ -1215,6 +1217,7 @@ $(document).ready(function() {
                            <option value="VASTA">VASTA</option>
                            <option value="APAL">APAL</option>
                            <option value="GEIMA">GEIMA</option>
+                           <option value="GEIMA+APAL">GEIMA+APAL</option>
                            <option value="UNIONBERG">UNIONBERG</option>
                            <option value="ALTRO">ALTRO</option>
                        </select>
